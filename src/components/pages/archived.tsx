@@ -6,16 +6,17 @@ interface ArchivedProps{
     notes : NoteInterface[];
     onArchive(_id: number) : void;
     onStar(_id: number) : void;
+    onDelete(_id: number) : void;
 }
 
 export default function Archived(props : ArchivedProps) {
-  const { notes, onArchive, onStar } = props;
+  const { notes, ...methods } = props;
 
   const filteredNotes = notes.filter((note : NoteInterface) => note.archived);
 
   return (
     <Dashboard placeholder="">
-      <NoteList notes={filteredNotes} onArchive={onArchive} onStar={onStar} />
+      <NoteList notes={filteredNotes} {...methods} />
     </Dashboard>
   );
 }

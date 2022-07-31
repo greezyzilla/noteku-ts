@@ -7,11 +7,12 @@ interface HomeProps{
     filter : string;
     onArchive(_id: number) : void;
     onStar(_id: number) : void;
+    onDelete(_id: number) : void;
 }
 
 export default function Home(props : HomeProps) {
   const {
-    notes, filter, onArchive, onStar,
+    notes, filter, ...methods
   } = props;
 
   const filteredNotes = notes.filter((note : NoteInterface) => (
@@ -21,7 +22,7 @@ export default function Home(props : HomeProps) {
 
   return (
     <Dashboard placeholder={filter}>
-      <NoteList notes={filteredNotes} onArchive={onArchive} onStar={onStar} />
+      <NoteList notes={filteredNotes} {...methods} />
     </Dashboard>
   );
 }

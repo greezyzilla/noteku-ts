@@ -5,18 +5,17 @@ interface NoteListProps{
     notes : NoteInterface[];
     onArchive(_id: number) : void;
     onStar(_id: number) : void;
+    onDelete(_id: number) : void;
 }
 
 export default function NoteList(props : NoteListProps) {
-  const { notes, onArchive, onStar } = props;
+  const { notes, ...methods } = props;
 
   const notesElement = notes.map((note : NoteInterface) => (
     <Note
       {...note}
       key={note.id}
-      onDelete={() => console.log(`delete note-${note.id}`)}
-      onArchive={onArchive}
-      onStar={onStar}
+      {...methods}
     />
   ));
 

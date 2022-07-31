@@ -3,7 +3,7 @@ import { NoteInterface } from '../../interfaces';
 import { showFormattedDate } from '../../utils';
 
 interface NoteProps extends NoteInterface{
-    onDelete(): void;
+    onDelete(_id: number): void;
     onArchive(_id: number): void;
     onStar(_id: number): void;
 }
@@ -35,7 +35,7 @@ export default function Note(props : NoteProps) {
       <div className="h-full flex flex-col justify-between px-2 pb-2">
         <p className="text-sm text-slate-500 h-fit mb-3 px-2">{body}</p>
         <div className="flex gap-1">
-          <button type="button" onClick={() => onDelete()} className={deleteButtonClass}>
+          <button type="button" onClick={() => onDelete(+id)} className={deleteButtonClass}>
             {icons.trash}
           </button>
           <button type="button" onClick={() => onArchive(+id)} className={archivedButtonClass}>

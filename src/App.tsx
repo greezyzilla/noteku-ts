@@ -36,6 +36,12 @@ class App extends Component<any, RootState> {
     this.setState({ notes: newNotes });
   }
 
+  onDeleteHandle(id: number) {
+    const { notes } = this.state;
+    const newNotes = notes.filter((note : NoteInterface) => note.id !== id);
+    this.setState({ notes: newNotes });
+  }
+
   render() {
     const { notes, filter } = this.state;
 
@@ -45,21 +51,25 @@ class App extends Component<any, RootState> {
         filter={filter}
         onArchive={(id:number) => this.onArchiveHandle(id)}
         onStar={(id:number) => this.onStarHandle(id)}
+        onDelete={(id:number) => this.onDeleteHandle(id)}
       />,
       active: <ActivePage
         notes={notes}
         onArchive={(id:number) => this.onArchiveHandle(id)}
         onStar={(id:number) => this.onStarHandle(id)}
+        onDelete={(id:number) => this.onDeleteHandle(id)}
       />,
       starred: <StarredPage
         notes={notes}
         onArchive={(id:number) => this.onArchiveHandle(id)}
         onStar={(id:number) => this.onStarHandle(id)}
+        onDelete={(id:number) => this.onDeleteHandle(id)}
       />,
       archived: <ArchivedPage
         notes={notes}
         onArchive={(id:number) => this.onArchiveHandle(id)}
         onStar={(id:number) => this.onStarHandle(id)}
+        onDelete={(id:number) => this.onDeleteHandle(id)}
       />,
     };
 
