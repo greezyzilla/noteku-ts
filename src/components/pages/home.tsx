@@ -1,13 +1,9 @@
-import { NoteInterface } from '../../interfaces';
+import { NoteInterface, PageInterface } from '../../interfaces';
 import { NoteList } from '../organisms';
 import Dashboard from '../templates/dashboard';
 
-interface HomeProps{
-    notes : NoteInterface[];
+interface HomeProps extends PageInterface{
     filter : string;
-    onArchive(_id: number) : void;
-    onStar(_id: number) : void;
-    onDelete(_id: number) : void;
 }
 
 export default function Home(props : HomeProps) {

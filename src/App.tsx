@@ -45,32 +45,17 @@ class App extends Component<any, RootState> {
   render() {
     const { notes, filter } = this.state;
 
+    const methods = {
+      onArchive: (id:number) => this.onArchiveHandle(id),
+      onStar: (id:number) => this.onStarHandle(id),
+      onDelete: (id:number) => this.onDeleteHandle(id),
+    };
+
     const components = {
-      all: <HomePage
-        notes={notes}
-        filter={filter}
-        onArchive={(id:number) => this.onArchiveHandle(id)}
-        onStar={(id:number) => this.onStarHandle(id)}
-        onDelete={(id:number) => this.onDeleteHandle(id)}
-      />,
-      active: <ActivePage
-        notes={notes}
-        onArchive={(id:number) => this.onArchiveHandle(id)}
-        onStar={(id:number) => this.onStarHandle(id)}
-        onDelete={(id:number) => this.onDeleteHandle(id)}
-      />,
-      starred: <StarredPage
-        notes={notes}
-        onArchive={(id:number) => this.onArchiveHandle(id)}
-        onStar={(id:number) => this.onStarHandle(id)}
-        onDelete={(id:number) => this.onDeleteHandle(id)}
-      />,
-      archived: <ArchivedPage
-        notes={notes}
-        onArchive={(id:number) => this.onArchiveHandle(id)}
-        onStar={(id:number) => this.onStarHandle(id)}
-        onDelete={(id:number) => this.onDeleteHandle(id)}
-      />,
+      all: <HomePage notes={notes} filter={filter} {...methods} />,
+      active: <ActivePage notes={notes} {...methods} />,
+      starred: <StarredPage notes={notes} {...methods} />,
+      archived: <ArchivedPage notes={notes} {...methods} />,
     };
 
     return (
