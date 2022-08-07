@@ -1,7 +1,7 @@
 import {
   ArchiveIcon, CalendarIcon, StarIcon, ViewGridIcon,
 } from '@heroicons/react/solid';
-import { SidebarItem } from '../molecules';
+import SidebarItem from './sidebarItem';
 
 export default function Sidebar() {
   const icons = {
@@ -12,7 +12,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="col-span-2 flex flex-col gap-3 py-2">
+    <div className="col-span-2 flex flex-col gap-3 py-2 h-full">
       <SidebarItem icon={icons.grid} label="All Notes" path="/" />
       <div>
         <p className="mx-5 font-semibold text-slate-400 text-sm">TAGS</p>

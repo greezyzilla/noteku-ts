@@ -23,7 +23,7 @@ export default function SidebarItem(props : SidebarItemProps) {
   return (
     <NavLink
       to={path}
-      className={({ isActive } : NavlinkClassInterface) => (isActive ? mergedClass : normalClass)}
+      className={({ isActive } : NavlinkClassInterface) => (isActive ? mergedClass : `${normalClass} font-light`)}
     >
       {icon}
       <p>{label}</p>
