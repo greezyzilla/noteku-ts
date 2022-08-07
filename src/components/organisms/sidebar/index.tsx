@@ -19,7 +19,7 @@ export default function Sidebar() {
         <div className="flex flex-col">
           <SidebarItem icon={icons.calendar} label="Active" path="/active" />
           <SidebarItem icon={icons.star} label="Starred" path="/starred" />
-          <SidebarItem icon={icons.archived} label="Active" path="/archived" />
+          <SidebarItem icon={icons.archived} label="Archived" path="/archived" />
         </div>
       </div>
     </div>
