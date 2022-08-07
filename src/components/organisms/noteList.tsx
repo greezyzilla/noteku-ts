@@ -1,8 +1,11 @@
-import { NoteInterface, PageInterface } from '../../interfaces';
+import { NoteInterface } from '../../interfaces';
 import { Note } from '../molecules';
 
-interface NoteListProps extends PageInterface{
-
+interface NoteListProps{
+  notes : NoteInterface[];
+  onArchive(_id: number) : void;
+  onStar(_id: number) : void;
+  onDelete(_id: number) : void;
 }
 
 export default function NoteList(props : NoteListProps) {

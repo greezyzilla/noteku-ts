@@ -42,20 +42,33 @@ class App extends Component<any, RootState> {
     this.setState({ notes: newNotes });
   }
 
+  onSearchHandle(query: string) {
+    console.log(query);
+    this.setState({ filter: query });
+  }
+
   render() {
     const { notes, filter } = this.state;
+    const filteredNotes = notes
+      .filter((note : NoteInterface) => (
+        note.title.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+        || note.body.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+      ));
 
-    const methods = {
+    const pageProps = {
+      notes: filteredNotes,
+      filter,
       onArchive: (id:number) => this.onArchiveHandle(id),
       onStar: (id:number) => this.onStarHandle(id),
       onDelete: (id:number) => this.onDeleteHandle(id),
+      onSearch: (query: string) => this.onSearchHandle(query),
     };
 
     const components = {
-      all: <HomePage notes={notes} filter={filter} {...methods} />,
-      active: <ActivePage notes={notes} {...methods} />,
-      starred: <StarredPage notes={notes} {...methods} />,
-      archived: <ArchivedPage notes={notes} {...methods} />,
+      all: <HomePage {...pageProps} />,
+      active: <ActivePage {...pageProps} />,
+      starred: <StarredPage {...pageProps} />,
+      archived: <ArchivedPage {...pageProps} />,
     };
 
     return (

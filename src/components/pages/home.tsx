@@ -1,24 +1,15 @@
-import { NoteInterface, PageInterface } from '../../interfaces';
+import { PageInterface } from '../../interfaces';
 import { NoteList } from '../organisms';
 import Dashboard from '../templates/dashboard';
 
-interface HomeProps extends PageInterface{
-    filter : string;
-}
-
-export default function Home(props : HomeProps) {
+export default function Home(props : PageInterface) {
   const {
-    notes, filter, ...methods
+    notes, filter, onSearch, ...methods
   } = props;
 
-  const filteredNotes = notes.filter((note : NoteInterface) => (
-    note.title.toLowerCase().includes(filter)
-    && note.body.toLowerCase().includes(filter)
-  ));
-
   return (
-    <Dashboard placeholder={filter}>
-      <NoteList notes={filteredNotes} {...methods} />
+    <Dashboard filter={filter} onSearch={onSearch}>
+      <NoteList notes={notes} {...methods} />
     </Dashboard>
   );
 }

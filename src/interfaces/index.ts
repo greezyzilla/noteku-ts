@@ -9,7 +9,9 @@ export interface NoteInterface{
 
 export interface PageInterface{
     notes : NoteInterface[];
+    filter: string;
     onArchive(_id: number) : void;
     onStar(_id: number) : void;
     onDelete(_id: number) : void;
+    onSearch(_query: string) : void;
 }
