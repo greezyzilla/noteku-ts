@@ -21,7 +21,7 @@ export default function NoteList(props : NoteListProps) {
 
   return (
     <div className="h-full">
-      <div className="grid grid-cols-4 gap-4 overflow-auto h-fit px-5 py-4 box-border w-full">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 overflow-auto h-fit px-5 py-4 box-border w-full">
         { notesElement }
       </div>
     </div>

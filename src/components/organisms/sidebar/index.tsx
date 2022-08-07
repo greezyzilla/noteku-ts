@@ -12,7 +12,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="col-span-2 flex flex-col gap-3 py-2 h-full">
+    <div className="lg:col-span-2 col-span-3 hidden md:flex flex-col gap-3 py-2 h-full">
       <SidebarItem icon={icons.grid} label="All Notes" path="/" />
       <div>
         <p className="mx-5 font-semibold text-slate-400 text-sm">TAGS</p>

@@ -16,7 +16,7 @@ export default function Dashboard(props : DashboardProps) {
         <main className="flex overflow-hidden h-full">
           <div className="grid grid-cols-12 divide-x divide-slate-600/10 w-full">
             <Sidebar />
-            <div className="h-full col-span-10 flex overflow-y-auto">
+            <div className="h-full lg:col-span-10 md:col-span-9 col-span-12 flex overflow-y-auto">
               {children}
             </div>
           </div>
