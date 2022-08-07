@@ -9,18 +9,18 @@ interface DashboardProps{
 export default function Dashboard(props : DashboardProps) {
   const { children, placeholder } = props;
   return (
-    <div className="min-h-screen h-screen">
-      <div className="container mx-auto flex flex-col h-full divide-y divide-slate-600/10">
+    <div className="max-h-screen h-screen">
+      <div className="container mx-auto flex flex-col h-full divide-y divide-slate-600/10 box-border">
         <Header placeholder={placeholder} />
-        <div className="grid grid-cols-12 h-full divide-x divide-slate-600/10">
-          <Sidebar />
-          <div className="col-span-10 px-5 py-3 flex flex-col">
-            <main className="h-full">
+        <main className="flex overflow-hidden h-full">
+          <div className="grid grid-cols-12 divide-x divide-slate-600/10 w-full">
+            <Sidebar />
+            <div className="h-full col-span-10 flex overflow-y-auto">
               {children}
-            </main>
-            <Footer />
+            </div>
           </div>
-        </div>
+        </main>
+        <Footer />
       </div>
     </div>
   );

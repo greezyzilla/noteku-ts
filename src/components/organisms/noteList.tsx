@@ -17,7 +17,8 @@ export default function NoteList(props : NoteListProps) {
   ));
 
   return (
-    <div className="grid grid-cols-5 gap-6">
+    <div className="grid grid-cols-4 gap-4 overflow-auto h-full px-5 py-4 box-border w-full">
+      { notesElement }
       { notesElement }
     </div>
   );

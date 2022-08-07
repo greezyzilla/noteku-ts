@@ -27,13 +27,13 @@ export default function Note(props : NoteProps) {
   const starButtonClass = ['rounded-br-md', starred ? buttonActiveClass : buttonNormalClass].join(' ');
 
   return (
-    <div key={id} className="flex flex-col gap-2 box-border border border-slate-600/15 hover:ring-4 ring-slate-50 rounded-md">
+    <div key={id} className="flex flex-col gap-2 box-border border border-slate-300 hover:ring-4 ring-slate-100 rounded-md">
       <div className="px-4 pt-4">
-        <h5 className="font-semibold text-slate-800 text-lg truncate">{title}</h5>
-        <p className="text-slate-600 text-xs">{showFormattedDate(createdAt)}</p>
+        <p className="text-slate-600 text-xs font-light">{showFormattedDate(createdAt)}</p>
+        <h5 className="font-semibold text-slate-600 text-lg">{title}</h5>
       </div>
       <div className="h-full flex flex-col justify-between px-2 pb-2">
-        <p className="text-sm text-slate-500 h-fit mb-3 px-2">{body}</p>
+        <p className="text-sm text-slate-600 h-fit mb-3 px-2 font-normal leading-[170%]">{body}</p>
         <div className="flex gap-1">
           <button type="button" onClick={() => onDelete(+id)} className={deleteButtonClass}>
             {icons.trash}
