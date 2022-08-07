@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 
 interface ButtonProps{
-    onClick() : void;
-    children: ReactElement
+    onClick: (() => void) | ((_cb : () => void) => void);
+    children: ReactElement | string;
     className: string;
 }
 
@@ -12,7 +12,7 @@ export default function Button(props : ButtonProps) {
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={(_any? : any) => onClick(_any)}
       className={className}
     >
       {children}

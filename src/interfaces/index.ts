@@ -14,4 +14,5 @@ export interface PageInterface{
     onStar(_id: number) : void;
     onDelete(_id: number) : void;
     onSearch(_query: string) : void;
+    onAdd(_note: NoteInterface) : void;
 }

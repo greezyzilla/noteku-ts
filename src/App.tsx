@@ -43,8 +43,17 @@ class App extends Component<any, RootState> {
   }
 
   onSearchHandle(query: string) {
-    console.log(query);
     this.setState({ filter: query });
+  }
+
+  onAddHandle(note : NoteInterface) {
+    this.setState((prevState : RootState) => ({
+      ...prevState,
+      notes: [
+        note,
+        ...prevState.notes,
+      ],
+    }));
   }
 
   render() {
@@ -62,6 +71,7 @@ class App extends Component<any, RootState> {
       onStar: (id:number) => this.onStarHandle(id),
       onDelete: (id:number) => this.onDeleteHandle(id),
       onSearch: (query: string) => this.onSearchHandle(query),
+      onAdd: (note : NoteInterface) => this.onAddHandle(note),
     };
 
     const components = {

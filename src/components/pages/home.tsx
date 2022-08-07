@@ -4,11 +4,11 @@ import Dashboard from '../templates/dashboard';
 
 export default function Home(props : PageInterface) {
   const {
-    notes, filter, onSearch, ...methods
+    notes, filter, onSearch, onAdd, ...methods
   } = props;
 
   return (
-    <Dashboard filter={filter} onSearch={onSearch}>
+    <Dashboard filter={filter} onSearch={onSearch} onAdd={onAdd}>
       <NoteList notes={notes} {...methods} />
     </Dashboard>
   );
