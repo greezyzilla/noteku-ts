@@ -1,43 +1,62 @@
 import { ChangeEvent, Component, FormEvent } from 'react';
 import { createPortal } from 'react-dom';
-import { PencilAltIcon } from '@heroicons/react/solid';
-import Modal from '../../molecules/modal';
+import { PlusIcon } from '@heroicons/react/solid';
+import Modal from '../modal';
 
-import { Button } from '../../molecules';
-import { InputText, InputTextarea } from '../../atoms';
 import { NoteInterface } from '../../../interfaces';
+import { Button, InputText, InputTextarea } from '../../atoms';
 
-interface EditNoteFormState{
+interface AddNoteFormState{
   data : NoteInterface;
   isActive : boolean;
 }
 
-interface EditNoteFormProps{
-  note: NoteInterface;
-  onEdit(_note: NoteInterface) : void;
+interface AddNoteFormProps{
+  onAdd(_note: NoteInterface) : void;
   children(_params : { onClick: () => void }) : void;
 }
 
-export default class EditNoteForm extends Component<EditNoteFormProps, EditNoteFormState> {
-  constructor(props : EditNoteFormProps) {
+const initialState = {
+  data: {
+    title: '',
+    archived: false,
+    starred: false,
+    body: '',
+  },
+  isActive: false,
+};
+
+export default class AddNoteForm extends Component<AddNoteFormProps, AddNoteFormState> {
+  constructor(props : AddNoteFormProps) {
     super(props);
-    const { note } = props;
-    this.state = { data: note, isActive: false };
+    this.state = {
+      ...initialState,
+      data: {
+        ...initialState.data,
+        id: +new Date(),
+        createdAt: new Date().toISOString(),
+      },
+    };
   }
 
   onCloseHandle() {
-    const { note } = this.props;
-    this.setState({ data: note, isActive: false });
+    this.setState({
+      ...initialState,
+      data: {
+        ...initialState.data,
+        id: +new Date(),
+        createdAt: new Date().toISOString(),
+      },
+    });
   }
 
   onOpenHandle() {
-    const { note } = this.props;
-    this.setState({ data: note, isActive: true });
+    this.setState({ isActive: true });
   }
 
   onChangeHandle(event : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (event.target.name === 'title' && event.target.value.length > 50) return;
-    this.setState((prevState : EditNoteFormState) => ({
+    this.setState((prevState : AddNoteFormState) => ({
       ...prevState,
       data: {
         ...prevState.data,
@@ -47,10 +66,10 @@ export default class EditNoteForm extends Component<EditNoteFormProps, EditNoteF
   }
 
   onSubmitHandle() {
-    const { onEdit } = this.props;
+    const { onAdd } = this.props;
     const { data } = this.state;
 
-    onEdit(data);
+    onAdd(data);
     this.onCloseHandle();
   }
 
@@ -61,12 +80,12 @@ export default class EditNoteForm extends Component<EditNoteFormProps, EditNoteF
     const modalComponent = isActive
       ? createPortal(
         <Modal onClose={() => this.onCloseHandle()}>
-          <div className="w-[500px] divide-y overflow-hidden rounded-md shadow-2xl">
-            <div className="flex items-center gap-4 bg-gradient-to-l from-orange-400 to-orange-600 px-5 pt-5 pb-4">
-              <div className="rounded-md bg-orange-100 p-2">
-                <PencilAltIcon className="h-3 w-3 text-orange-600" />
+          <div className="w-[500px] divide-y shadow-2xl">
+            <div className="flex items-center gap-4 bg-gradient-to-l from-blue-400 to-blue-600 px-5 pt-5 pb-4">
+              <div className="rounded-md bg-blue-100 p-2">
+                <PlusIcon className="h-3 w-3 text-blue-600" />
               </div>
-              <h2 className="text-xl font-bold text-white">EDIT NOTE</h2>
+              <h2 className="text-xl font-bold text-white">ADD NEW NOTE</h2>
             </div>
             <div className="flex flex-col gap-4 divide-y-2 px-8 pt-4 pb-5">
               <form className="flex flex-col gap-4" onSubmit={(e : FormEvent) => e.preventDefault()}>
@@ -77,7 +96,7 @@ export default class EditNoteForm extends Component<EditNoteFormProps, EditNoteF
                   onChange={(e : ChangeEvent<HTMLInputElement>) => this.onChangeHandle(e)}
                   value={title}
                   limit={50}
-                  isSecondary
+                  isPrimary
                 />
                 <InputTextarea
                   name="body"
@@ -85,13 +104,13 @@ export default class EditNoteForm extends Component<EditNoteFormProps, EditNoteF
                   placeholder="Something you want to write about this note?"
                   onChange={(e : ChangeEvent<HTMLTextAreaElement>) => this.onChangeHandle(e)}
                   value={body}
-                  isSecondary
+                  isPrimary
                 />
               </form>
             </div>
-            <div className="flex">
-              <Button onClick={() => this.onCloseHandle()} isSecondary>Close</Button>
-              <Button onClick={() => this.onSubmitHandle()} isSecondary isFilled className="h-14">Submit</Button>
+            <div className="flex h-14">
+              <Button onClick={() => this.onCloseHandle()} isPrimary>Close</Button>
+              <Button onClick={() => this.onSubmitHandle()} isPrimary isFilled>Submit</Button>
             </div>
           </div>
         </Modal>,
