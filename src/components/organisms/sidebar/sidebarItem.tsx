@@ -1,9 +1,10 @@
-import { ReactElement } from 'react';
+import classcat from 'classcat';
+import { ComponentProps, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
 interface SidebarItemProps{
     path: string;
-    icon: ReactElement;
+    Icon(_props : ComponentProps<'svg'>): ReactElement;
     label: string;
 }
 
@@ -13,20 +14,34 @@ interface NavlinkClassInterface{
 
 export default function SidebarItem(props : SidebarItemProps) {
   const {
-    path = '/', icon, label,
+    path = '/', Icon, label,
   } = props;
 
-  const activeClass = 'bg-gradient-to-l border-r-4';
-  const normalClass = 'flex px-5 py-3 items-center gap-2 hover:bg-gradient-to-l from-slate-200 text-slate-500 border-slate-500';
-  const mergedClass = [normalClass, activeClass].join(' ');
+  const getLinkClassname = (active : boolean) => classcat({
+    'group flex items-center gap-2 py-3 px-2 text-sm hover:bg-gradient-to-bl': true,
+    'border-r-4 border-blue-500 bg-gradient-to-bl from-blue-100 font-semibold text-slate-500': active,
+    'text-slate-500 hover:from-slate-100 hover:text-slate-600': !active,
+  });
+
+  const getIconClassname = (active : boolean) => classcat({
+    'rounded-sm p-1': true,
+    'bg-slate-400 text-white group-hover:bg-slate-500': !active,
+    'bg-blue-400 text-white': active,
+  });
 
   return (
     <NavLink
       to={path}
-      className={({ isActive } : NavlinkClassInterface) => (isActive ? mergedClass : `${normalClass} font-light`)}
+      className={({ isActive } : NavlinkClassInterface) => getLinkClassname(isActive)}
     >
-      {icon}
-      <p>{label}</p>
+      {({ isActive } : any) => (
+        <>
+          <div className={getIconClassname(isActive)}>
+            <Icon className="h-4 w-4" />
+          </div>
+          <p>{label}</p>
+        </>
+      )}
     </NavLink>
   );
 }
