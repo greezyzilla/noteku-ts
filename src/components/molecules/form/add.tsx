@@ -1,10 +1,11 @@
 import { ChangeEvent, Component, FormEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { PlusIcon } from '@heroicons/react/solid';
-import Modal from '../modal';
 
 import { NoteInterface } from '../../../interfaces';
-import { Button, InputText, InputTextarea } from '../../atoms';
+import {
+  Button, InputText, InputTextarea, Modal,
+} from '../../atoms';
 
 interface AddNoteFormState{
   data : NoteInterface;
@@ -80,14 +81,14 @@ export default class AddNoteForm extends Component<AddNoteFormProps, AddNoteForm
     const modalComponent = isActive
       ? createPortal(
         <Modal onClose={() => this.onCloseHandle()}>
-          <div className="w-[500px] divide-y shadow-2xl">
+          <div className="w-[320px] divide-y shadow-2xl sm:w-[500px]">
             <div className="flex items-center gap-4 bg-gradient-to-l from-blue-400 to-blue-600 px-5 pt-5 pb-4">
               <div className="rounded-md bg-blue-100 p-2">
                 <PlusIcon className="h-3 w-3 text-blue-600" />
               </div>
               <h2 className="text-xl font-bold text-white">ADD NEW NOTE</h2>
             </div>
-            <div className="flex flex-col gap-4 divide-y-2 px-8 pt-4 pb-5">
+            <div className="flex flex-col gap-4 divide-y-2 px-5 pt-4 pb-5 sm:px-8">
               <form className="flex flex-col gap-4" onSubmit={(e : FormEvent) => e.preventDefault()}>
                 <InputText
                   name="title"
