@@ -56,12 +56,22 @@ class App extends Component<any, RootState> {
     }));
   }
 
+  onEditHandle(id : number | string, newNote : NoteInterface) {
+    const { notes } = this.state;
+    const noteId = notes.findIndex((n : NoteInterface) => n.id === id);
+    notes[+noteId] = newNote;
+    this.setState((prevState : RootState) => ({
+      ...prevState,
+      notes,
+    }));
+  }
+
   render() {
     const { notes, filter } = this.state;
     const filteredNotes = notes
       .filter((note : NoteInterface) => (
         note.title.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
-        || note.body.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+      || note.body.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
       ));
 
     const pageProps = {
@@ -72,21 +82,15 @@ class App extends Component<any, RootState> {
       onDelete: (id:number) => this.onDeleteHandle(id),
       onSearch: (query: string) => this.onSearchHandle(query),
       onAdd: (note : NoteInterface) => this.onAddHandle(note),
-    };
-
-    const components = {
-      all: <HomePage {...pageProps} />,
-      active: <ActivePage {...pageProps} />,
-      starred: <StarredPage {...pageProps} />,
-      archived: <ArchivedPage {...pageProps} />,
+      onEdit: (id : number | string, note : NoteInterface) => this.onEditHandle(id, note),
     };
 
     return (
       <Routes>
-        <Route path="/" element={components.all} />
-        <Route path="/active" element={components.active} />
-        <Route path="/starred" element={components.starred} />
-        <Route path="/archived" element={components.archived} />
+        <Route path="/" element={<HomePage {...pageProps} />} />
+        <Route path="/active" element={<ActivePage {...pageProps} />} />
+        <Route path="/starred" element={<StarredPage {...pageProps} />} />
+        <Route path="/archived" element={<ArchivedPage {...pageProps} />} />
       </Routes>
     );
   }
