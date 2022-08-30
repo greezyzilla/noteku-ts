@@ -14,15 +14,17 @@ export default function SearchNote(props: SearchNoteProps) {
   };
 
   return (
-    <div className="relative">
-      <SearchIcon className="w-4 h-4 text-slate-400 absolute top-1/2 -translate-y-1/2 left-3 z-10" />
+    <div className="flex">
       <input
-        type="text"
-        className="h-11 w-64 text-slate-500 placeholder:text-slate-400 focus:outline-none flex justify-center items-center text-sm border border-slate-300 focus:border-slate-500 rounded-full  pl-9 pr-6"
+        type="search"
+        className="-mr-10 flex h-full w-48 items-center justify-center border-slate-300 pl-4 pr-12 text-xs text-slate-600 placeholder:text-slate-400 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-100 sm:-mr-12  sm:w-64 sm:text-sm"
         placeholder="Search note here..."
         value={filter}
         onChange={changeHandle}
       />
+      <div className="flex h-10 w-10 items-center justify-center bg-blue-500 sm:h-12 sm:w-12">
+        <SearchIcon className="h-4 w-4 text-white" />
+      </div>
     </div>
   );
 }

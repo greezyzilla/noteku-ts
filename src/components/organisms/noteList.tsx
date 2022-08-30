@@ -6,6 +6,7 @@ interface NoteListProps{
   onArchive(_id: number) : void;
   onStar(_id: number) : void;
   onDelete(_id: number) : void;
+  onEdit(_id: number, _note: NoteInterface) : void;
 }
 
 export default function NoteList(props : NoteListProps) {
@@ -20,17 +21,17 @@ export default function NoteList(props : NoteListProps) {
   ));
 
   return (
-    <div className="h-full w-full">
+    <div className="box-border flex h-full w-full">
       {
         notesElement.length ? (
-          <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 overflow-auto h-fit px-5 py-4 box-border w-full">
+          <div className="box-border grid h-fit w-full grid-cols-1 gap-4 overflow-auto px-5 py-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             { notesElement }
           </div>
         ) : (
-          <div className="w-full h-full flex items-center justify-center flex-col">
-            <div className="-mt-64">
-              <img src="./404.gif" alt="" className="w-80 h-80" />
-              <p className="text-center -mt-20 text-slate-600 leading-7">
+          <div className="mx-5 mt-3 box-border flex w-full flex-col items-center justify-center bg-white/80 md:ml-3 xl:mr-3">
+            <div className="flex flex-col items-center justify-center">
+              <img src="./404.gif" alt="404" className="-mt-24 -mb-16 h-72 w-72 sm:h-80 sm:w-80" />
+              <p className="text-center text-sm font-semibold leading-4 text-slate-500 sm:text-lg sm:leading-7">
                 Whooopss... no note found
                 <br />
                 But you can always create the new one!

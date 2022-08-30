@@ -9,14 +9,17 @@ export default function Header(props : HeaderProps) {
   const { filter, onSearch } = props;
 
   return (
-    <header className="flex w-full h-fit">
-      <div className="grid grid-cols-12 w-full flex-1">
-        <div className="col-span-2 py-3 text-2xl font-semibold text-slate-600 px-5 font-roboto flex items-center">Noteku</div>
-        <div className="col-span-10 py-3 px-5">
+    <header className="flex h-fit w-full bg-white/80 shadow-sm">
+      <div className="grid w-full flex-1 grid-cols-12 px-4 sm:px-8">
+        <div className="col-span-2 flex items-center py-3">
+          <p className="text-3xl font-black text-slate-600">
+            <span className="text-blue-500">NOTE</span>
+            <span className="text-orange-400">KU</span>
+          </p>
+        </div>
+        <div className="col-span-10 py-3">
           <div className="flex justify-end">
-            <div className="flex gap-4">
-              <SearchNote filter={filter} onSearch={onSearch} />
-            </div>
+            <SearchNote filter={filter} onSearch={onSearch} />
           </div>
         </div>
       </div>
