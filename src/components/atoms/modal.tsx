@@ -20,10 +20,10 @@ export default function modal(props : ModalProps) {
       tabIndex={0}
       role="button"
       onKeyDown={enterKeyHandle}
-      className="absolute z-50 w-screen h-screen left-0 top-0 flex justify-center items-center bg-slate-800/80 cursor-default"
+      className="absolute left-0 top-0 z-50 flex h-screen w-screen cursor-default items-center justify-center bg-black/10 backdrop-blur-lg"
     >
       <div
-        className="bg-white p-10 cursor-default rounded-lg"
+        className="cursor-default rounded-lg bg-white"
         onClick={(e : MouseEvent<HTMLDivElement>) => e.stopPropagation()}
         onKeyDown={() => {}}
         tabIndex={0}
